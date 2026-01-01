@@ -19,6 +19,7 @@ import {
 import { getCompanies } from "@/api/apiCompanies";
 import { getJobs } from "@/api/apijobs";
 
+
 const JobListing = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [location, setLocation] = useState("");
