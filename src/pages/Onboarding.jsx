@@ -5,23 +5,26 @@ import { useEffect } from "react";
 import { BarLoader } from "react-spinners";
 
 const Onboarding = () => {
-  const { user, isLoaded } = useUser();
+  const { user, isLoaded, isSignedIn } = useUser();
   const navigate = useNavigate();
+
+  if (!isLoaded) {
+    return <BarLoader width="100%" color="#36d7b7" />;
+  }
+
+  // Not signed in → sign-in
+  if (!isSignedIn) {
+    navigate("/?sign-in=true");
+    return null;
+  }
 
   const navigateUser = (currRole) => {
     navigate(currRole === "recruiter" ? "/post-job" : "/jobs");
   };
 
   const handleRoleSelection = async (role) => {
-    await user
-      .update({ unsafeMetadata: { role } })
-      .then(() => {
-        console.log(`Role updated to: ${role}`);
-        navigateUser(role);
-      })
-      .catch((err) => {
-        console.error("Error updating role:", err);
-      });
+    await user.update({ unsafeMetadata: { role } });
+    navigateUser(role);
   };
 
   useEffect(() => {
@@ -29,11 +32,9 @@ const Onboarding = () => {
       navigateUser(user.unsafeMetadata.role);
     }
   }, [user]);
-  
-  if (!isLoaded)
-    return <BarLoader classname="mb-4" width="100%" color="#36d7b7" />;
+
   return (
-    <div className="flex flex-col items-center justify-center mt-16 ">
+    <div className="flex flex-col items-center justify-center mt-16">
       <h2 className="gradient-title font-extrabold text-7xl sm:text-8xl tracking-tighter">
         I am a...
       </h2>
