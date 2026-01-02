@@ -7,10 +7,10 @@ import { ThemeProvider } from "./components/theme-provider";
 import LandingPage from "./pages/LandingPage.jsx";
 import Onboarding from "./pages/Onboarding.jsx";
 import PostJob from "./pages/PostJob";
-import JobListing from "./pages/jobListing.jsx";
+import JobListing from "./pages/JobListing.jsx";
 import MyJobs from "./pages/MyJobs.jsx";
 import SavedJobs from "./pages/SaveJobs.jsx";
-import JobPage from "./pages/job";
+import JobPage from "./pages/Job";
 
 import "./App.css";
 
